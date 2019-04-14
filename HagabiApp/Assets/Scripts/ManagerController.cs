@@ -20,7 +20,7 @@ public class ManagerController : MonoBehaviour {
     /// <summary>
     /// 선택 버튼 번호 중복 체크용도.
     /// </summary>
-    public int checkButtonNum = 10000;
+    public string checkButtonNum = "";
 
     private static ManagerController m_Instance = null; 
 

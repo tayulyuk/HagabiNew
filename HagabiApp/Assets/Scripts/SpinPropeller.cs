@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class SpinPropeller : MonoBehaviour
 {
-    public int speed = 0;
+    public bool isTurn = false;
 	void Start () {
 		
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		transform.Rotate(0,0,speed*Time.deltaTime);
+        if(isTurn)
+		transform.Rotate(0,0,150 * Time.deltaTime);
 	}
 }

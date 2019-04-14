@@ -24,22 +24,29 @@ public class UpDownStopButtonClick : MonoBehaviour
 
     void OnClick()
     {
+        Debug.Log("transform name 1 : " + transform.name);
         order = OrderMessage();
         Debug.Log("order :" + order);
         Debug.Log("class :" + mqttManager.GetClassTopic(mc.currentClass));
 
         mqttManager.SendPublishButtonData(mqttManager.GetClassTopic(mc.currentClass),order);
 
-        StartCoroutine(ArrowAction());
+        
+        Debug.Log("mqttRecieveMessage1 :" + mqttManager.mqttRecieveMessage);
+
+       StartCoroutine(ArrowAction());
     }
 
     private IEnumerator ArrowAction()
     {
-        yield return new WaitForSeconds(.3f);
-        Debug.Log("order :" + order);
-        Debug.Log("mqttRecieveMessage :" + mqttManager.mqttRecieveMessage);
+        yield return new WaitForSeconds(.5f);
+        
+        if(mqttManager != null)
+            Debug.Log("not null  select num :" + mc.selectButtonNumber );
+        Debug.Log("mqttRecieveMessage 2:" + mqttManager.mqttRecieveMessage);
+       
         //보낸 신호와 받은 신호가 같다면 다음 동작을 한다.
-        if (mqttManager.mqttRecieveMessage.Trim() == order.Trim() || order.Trim() != String.Empty || mqttManager.mqttRecieveMessage.Trim() != String.Empty || order.Trim() != "" || mqttManager.mqttRecieveMessage.Trim() != "")
+        if (mqttManager.mqttRecieveMessage.Trim() == order.Trim() || !String.IsNullOrEmpty(mqttManager.mqttRecieveMessage) )
         {
             //HagabiDecision 씬의 버튼들.
             if (transform.name == "UpButton")
@@ -48,24 +55,18 @@ public class UpDownStopButtonClick : MonoBehaviour
                 GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().SelectStopCorouine();
                 GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().StartArrow(1); //1.up
             }
-            if (transform.name == "StopButton")
+            else if (transform.name == "StopButton")
             {
                 GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().AllOffArrowfBlank();
                 GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().SelectStopCorouine();
                 GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().StartArrow(2); //2.stop
             }
-            if (transform.name == "DownButton")
+            else if (transform.name == "DownButton")
             {
                 GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().AllOffArrowfBlank();
                 GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().SelectStopCorouine();
                 GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().StartArrow(3); //3.down
             }
-
-            //환풍기.
-            if (transform.name == "PropellerOnButton")
-               GetComponent<PropellerShowManager>().OnPropeller();
-            if (transform.name == "PropellerOffButton")
-                GetComponent<PropellerShowManager>().OffPropeller();
         }
         else
         {
@@ -74,44 +75,33 @@ public class UpDownStopButtonClick : MonoBehaviour
     }
 
     /// <summary>
-    /// 아두이노에서 10단위 이상만 검색할수 있다 그래서 1부터 시작하지 않고 11 부터 시작했다. %
+    ///  1~14까지.
     /// </summary>
     /// <returns></returns>
-    string OrderMessage()
+    private string OrderMessage()
     {
-       string order = "";
-        ///1-1up
-        if (transform.name == "UpButton")
+        string order = "";
+        Debug.Log("transform name3 : " + transform.name);
+        if (mc.selectButtonNumber != 13 && mc.selectButtonNumber != 14)
         {
-            if (mc.selectButtonNumber != 13 && mc.selectButtonNumber != 14)
+            Debug.Log("transform name : "  + transform.name);
+            //1-1up
+            if (transform.name == "UpButton")
+            {
                 order = "pinOn " + mc.selectButtonNumber;
-        }
-        //stop
-        if (transform.name == "StopButton")
-        {
-            if (mc.selectButtonNumber != 13 && mc.selectButtonNumber != 14)
+            }
+                //stop
+            else if (transform.name == "StopButton")
+            {
                 order = "pinIdle " + mc.selectButtonNumber;
-        }
-        //down
-        if (transform.name == "DownButton")
-        {
-             if (mc.selectButtonNumber != 13 && mc.selectButtonNumber != 14)
-                    order = "pinOff " + mc.selectButtonNumber;
-        }
-
-
-
-        if (transform.name == "PropellerOnButton")
-        {
-            if (mc.selectButtonNumber == 13 && mc.selectButtonNumber == 14)
-                order = "pinOn " + mc.selectButtonNumber;
-        }
-        if (transform.name == "PropellerOffButton")
-        {
-            if (mc.selectButtonNumber == 13 && mc.selectButtonNumber == 14)
+            }
+                //down
+            else if (transform.name == "DownButton")
+            {
                 order = "pinOff " + mc.selectButtonNumber;
+            }
         }
-        else
+         else
         {
             Debug.Log("알수 없는 버튼입니다.");
         }

@@ -9,11 +9,11 @@ public class PropellerShowManager : MonoBehaviour
     
     public void OnPropeller()
     {
-        propeller.GetComponent<SpinPropeller>().speed = 150;
+        propeller.GetComponent<SpinPropeller>().isTurn = true;
     }
     public void OffPropeller()
     {
-        propeller.GetComponent<SpinPropeller>().speed = 0;
+        propeller.GetComponent<SpinPropeller>().isTurn = false;
     }
 
 }

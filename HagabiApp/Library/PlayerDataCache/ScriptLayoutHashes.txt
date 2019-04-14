@@ -1,6 +1,6 @@
 Android
 PlayerPath?
-C:/HagabiPJ/Hagabi/hagabi.apk
+C:/HagabiNewProject/HagabiApp/hagabi.apk
 SceneListBegin?
 Assets/Scenes/Hagabi_first.unity
 Assets/Scenes/HagabiControl.unity
@@ -109,7 +109,7 @@ a4ba336b18824674218b3458f2e4d35c Assembly-CSharp.dll:.UIButtonColor
 f227ba7d745d69dce2a6474df892b93d Assembly-CSharp.dll:.EnvelopContent
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.SetColorPickerColor
 daef908f8bf97fa741305285dde8e82f Assembly-CSharp.dll:.WindowAutoYaw
-8e15c277f7ca50d7f6cbb8e48e8fb807 Assembly-CSharp.dll:.ManagerController
+d575b982afa3a818b1040ab4ef0f49b4 Assembly-CSharp.dll:.ManagerController
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationPlayableAsset
 0be0b96ca2c7dae97be6db2ff0ffae6d UnityEngine.Timeline.dll:UnityEngine.Timeline.ActivationTrack
 13bdb7c23815c33a33b37b0ba8dd39be UnityEngine.Timeline.dll:UnityEngine.Timeline.AnimationPlayableAsset
@@ -124,7 +124,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 607d64d2c4bc76ac9876e6f7b9cc7edf UnityEngine.Timeline.dll:UnityEngine.Timeline.TimelineAsset
 2948a0331d5bc18098e0bd0a2391d525 Assembly-CSharp.dll:.UIScrollView
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UpDownStopButtonClick
-c614e2948a9cff52dfd48f2591954d7b Assembly-CSharp.dll:.SpinPropeller
+a1a45660b29721bec49cfe925abd641b Assembly-CSharp.dll:.SpinPropeller
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CurrentContent
 b09f06ecfa4f8ab98ff831750612cd6d Assembly-CSharp.dll:.UIPlayTween
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
@@ -167,6 +167,7 @@ feea9fa519f717332c191791acaf5381 Assembly-CSharp.dll:.UISnapshotPoint
 c4a75f38edea8a816bd024aa376031be Assembly-CSharp.dll:.TweenFOV
 b2b7fe871a51c58a929bd270b5fb0041 Assembly-CSharp.dll:.UIPlayAnimation
 ef09686cacab03d94a8cc14711428c6b Assembly-CSharp.dll:.DownloadTexture
+ec41f28b106cad108af988b70cba5cfe Assembly-CSharp.dll:.MqttManager
 0ed5bc3d58c26257dfd7c50b3fcaafb7 Assembly-CSharp.dll:.UICenterOnChild
 136c2a49bb0374d3a30c982b57b1deb1 Assembly-CSharp.dll:.UIRoot
 46409ae3731c3c22da8052a51565f6b2 Assembly-CSharp.dll:.UISavedOption
@@ -184,11 +185,12 @@ ac4b8da881863d2cabf10e05b6e01c0a Assembly-CSharp.dll:.UIEventTrigger
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.CallbackExecutor
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Advertisements.dll:UnityEngine.Advertisements.Editor.Placeholder
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIDrawCall
-93b077bf83b2a4e20865588dd5527e8d Assembly-CSharp.dll:.WWWWiki
+eaa8829f2a9c1d925d59791e422eb2c0 Assembly-CSharp.dll:.WWWWiki
 12bc5799a48e88313e25e6302ec35720 Assembly-CSharp.dll:.UICamera
 5ee6b3a9ddfd1b34a29e37bff36c7883 Assembly-CSharp.dll:.InvAttachmentPoint
 cbe311702101a8fd2b4fe90072451a87 Assembly-CSharp.dll:.UIShowControlScheme
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UIWidgetContainer
+02ed306b5d1a1dd2047e7e40cd36d8c0 Assembly-CSharp.dll:.MqttTest
 7a616dbce92f73c40a3ca496077d8b39 Assembly-CSharp.dll:.ChatInput
 e83a9e5a848f2a14d2ba02d4208df41c Assembly-CSharp.dll:.UITooltip
 d416213fcbdab9c579b1328ce6f00d1a Assembly-CSharp.dll:.UIInput
@@ -215,6 +217,7 @@ e568ac27d5617cc8aba0434496cfdd33 Assembly-CSharp.dll:.UIPopupList
 da9f29ffd5c4f0ac8282bf265db79688 Assembly-CSharp.dll:.TypewriterEffect
 87850b8e331cb17df6147150299d2208 Assembly-CSharp.dll:.UIColorPicker
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:CI.HttpClient.Core.Dispatcher
+05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.ButtonPropellerControler
 5f090821814bc51a9f55429c0fa2da3e Assembly-CSharp.dll:.UIDragDropContainer
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Tutorial5
 c4a75f38edea8a816bd024aa376031be Assembly-CSharp.dll:.TweenFill
@@ -265,6 +268,7 @@ d62f60ad5ecff73b76da2ea09c712ada Assembly-CSharp.dll:.UIItemStorage
 8416e9da8fd7dbae60d969efdb2242bd Assembly-CSharp.dll:.UIStretch
 f55492bcd9d3c95b5981d8fd2428b885 Assembly-CSharp.dll:.UIDragDropItem
 83086ba0211ddfb14428d7c5d4a202d8 Assembly-CSharp.dll:.UIKeyBinding
+3125234037f2f02fc93c885e5ed02d9e Assembly-CSharp.dll:.TcpSendMessageManager
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.LanguageSelection
 01ca127772bebd003dc266e41c6d18bc Assembly-CSharp.dll:.UIDragCamera
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.Rotate
@@ -281,4 +285,3 @@ e7ae6e9ee8a8a6b2d7860a7212a8416e Assembly-CSharp.dll:.EquipRandomItem
 99ca7431436b7d3343aaef26acba433a Assembly-CSharp.dll:.UISprite
 fcffe9bbf1b7b7e4593e31031f78987b Assembly-CSharp.dll:.UISliderColors
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.RealTime
-3125234037f2f02fc93c885e5ed02d9e Assembly-CSharp.dll:.TcpSendMessageManager
