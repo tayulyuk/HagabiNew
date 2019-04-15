@@ -17,7 +17,7 @@ public class MqttManager : MonoBehaviour
     private string class2publish = "Hagabi/test2";  //2동 하우스
     private string class3publish = "Hagabi/test3";  //3동 하우스
     private string subscribeReciveTempHumiMessage = "ModelTempHumi/result";
-    private string subscribeReciveMessage = "Hagabi/result";
+    private string resultMessage = "Hagabi/result";
    
 
     public GameObject errorPopUpObject;
@@ -40,7 +40,7 @@ public class MqttManager : MonoBehaviour
 
         // subscribe to the topic "/home/temperature" with QoS 2 
         client.Subscribe(new string[] { subscribeReciveTempHumiMessage }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
-        client.Subscribe(new string[] { subscribeReciveMessage }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
+        client.Subscribe(new string[] { resultMessage }, new byte[] { MqttMsgBase.QOS_LEVEL_EXACTLY_ONCE });
     }
    
     void client_MqttMsgPublishReceived(object sender, MqttMsgPublishEventArgs e)
@@ -48,13 +48,13 @@ public class MqttManager : MonoBehaviour
     
         Debug.Log(e.Topic + " : " + System.Text.Encoding.UTF8.GetString(e.Message));
 
-        //moter constroler의 wifi가 불안정하여 다시 접속했다.
+        //moter constroler의 wifi가 불안정하여 다시 접속했다.  // 서버가 다시 접속 연결 됬습니다.
         if (System.Text.Encoding.UTF8.GetString(e.Message) == "Reconnected")
             isReConnect = true;
 
         if (e.Topic == subscribeReciveTempHumiMessage)
             TempHumiMessageParsing(System.Text.Encoding.UTF8.GetString(e.Message));
-        if (e.Topic == subscribeReciveMessage)
+        if (e.Topic == resultMessage)
             mqttRecieveMessage = Encoding.UTF8.GetString(e.Message).Trim();
     }
 

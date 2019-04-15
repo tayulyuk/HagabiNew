@@ -34,25 +34,25 @@ public class ButtonPropellerControler : MonoBehaviour {
             mqttManager.SendPublishButtonData(mqttManager.GetClassTopic(mc.currentClass), order);
 
 
-            Debug.Log("mqttRecieveMessage1 :" + mqttManager.mqttRecieveMessage);
+           // Debug.Log("mqttRecieveMessage1 :" + mqttManager.mqttRecieveMessage);
 
-            StartCoroutine(ArrowAction());
+            StartCoroutine(ScrewAction());
         }
     }
 
-    private IEnumerator ArrowAction()
+    private IEnumerator ScrewAction()
     {
         yield return new WaitForSeconds(.3f);
        
         //보낸 신호와 받은 신호가 같다면 다음 동작을 한다.
-        if (mqttManager.mqttRecieveMessage == order)
+        if (mqttManager.mqttRecieveMessage.Trim() == order)
         {
             //환풍기.
             if (transform.name == "PropellerOnButton")
             {
                 propellerShowManager.OnPropeller();
             }
-            else if (transform.name == "propellerOffButton")
+            else if (transform.name == "PropellerOffButton")
             {
                propellerShowManager.OffPropeller();
             }

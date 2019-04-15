@@ -257,9 +257,10 @@
      <Compile Include="Assets\Scripts\Mqtt\scripts\Utility\QueueExtension.cs" />
      <Compile Include="Assets\Scripts\Mqtt\scripts\Utility\Trace.cs" />
      <Compile Include="Assets\Scripts\MqttControlScripts\MqttManager.cs" />
+     <Compile Include="Assets\Scripts\PropellerSceneManager.cs" />
      <Compile Include="Assets\Scripts\PropellerShowManager.cs" />
      <Compile Include="Assets\Scripts\SpinPropeller.cs" />
-     <Compile Include="Assets\Scripts\TcpSendMessageManager.cs" />
+     <Compile Include="Assets\Scripts\Un_used\TcpSendMessageManager.cs" />
      <Compile Include="Assets\Scripts\UpDownStopButtonClick.cs" />
      <Compile Include="Assets\Scripts\WWWWiki.cs" />
      <Compile Include="Assets\Unity-Logs-Viewer\Reporter\MultiKeyDictionary.cs" />

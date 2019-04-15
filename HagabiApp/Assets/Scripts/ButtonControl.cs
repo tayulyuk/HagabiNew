@@ -7,14 +7,14 @@ public class ButtonControl : MonoBehaviour {
     void OnClick()
     {
         //어플 종료!
-        if (transform.name == "ApplicationCloseButton")
+        if (transform.name == "Exit_Button")
         {
-            Application.Quit();
+            StartCoroutine(AppClose());
         }
 
         if (transform.name == "ViewCloseButton")
         {
-            SceneManager.LoadScene("HagabiControl");
+            StartCoroutine(ViewCloseForSound());
         }
 
 
@@ -205,6 +205,18 @@ public class ButtonControl : MonoBehaviour {
                 HagabiFanControlDecisionSceneMove();
             }
         }
+    }
+
+    private IEnumerator AppClose()
+    {
+        yield return new WaitForSeconds(GetComponent<UIPlaySound>().audioClip.length);
+        Application.Quit();
+    }
+
+    private IEnumerator ViewCloseForSound()
+    {
+        yield return new WaitForSeconds(GetComponent<UIPlaySound>().audioClip.length);
+        SceneManager.LoadScene("HagabiControl");
     }
 
     private IEnumerator BeforeButtonForSound()

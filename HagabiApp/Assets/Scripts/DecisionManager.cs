@@ -23,8 +23,8 @@ public class DecisionManager : MonoBehaviour {
         if (GameObject.Find("ManagerGameObject") != null)
         {
             ManagerController mc = GameObject.Find("ManagerGameObject").GetComponent <ManagerController>();
-            classNum.text = mc.currentClass.ToString() + "동";
-            choiceNum.text = mc.selectButtonNumber.ToString() + "번 버튼";
+            classNum.text = "[00ff00]" + mc.currentClass + "[-]" + "동";
+            choiceNum.text = "[00ff00]" + mc.selectButtonNumber + "[-]" + "번 버튼";
             circleBlank.selectNumber = mc.selectButtonNumber;
 
         }

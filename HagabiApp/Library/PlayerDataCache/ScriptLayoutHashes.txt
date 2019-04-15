@@ -125,7 +125,7 @@ ff05dcdf90651c3d98a9cad3df5e471e UnityEngine.Timeline.dll:UnityEngine.Timeline.C
 2948a0331d5bc18098e0bd0a2391d525 Assembly-CSharp.dll:.UIScrollView
 05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.UpDownStopButtonClick
 a1a45660b29721bec49cfe925abd641b Assembly-CSharp.dll:.SpinPropeller
-05524b8f659e7bfe5756d1335fec24ba Assembly-CSharp.dll:.CurrentContent
+a735ec27bf90a3d4d43538d4dd867bca Assembly-CSharp.dll:.CurrentContent
 b09f06ecfa4f8ab98ff831750612cd6d Assembly-CSharp.dll:.UIPlayTween
 fc1e0f4d8439d9928083474691511a13 UnityEngine.Networking.dll:UnityEngine.Networking.NetworkAnimator
 05524b8f659e7bfe5756d1335fec24ba UnityEngine.Networking.dll:UnityEngine.Networking.NetworkBehaviour
@@ -264,6 +264,7 @@ bb614fa39b39c4954977762d0fc3e0b2 Assembly-CSharp.dll:.UIKeyNavigation
 bf0efa3a2b50052bc4430312d3cc0dad Assembly-CSharp.dll:.LagPosition
 f9ab08734ff0441703a923df780d4c90 Assembly-CSharp.dll:.UITextList
 d62f60ad5ecff73b76da2ea09c712ada Assembly-CSharp.dll:.UIItemStorage
+551f068b02fae13942276cc542f1f416 Assembly-CSharp.dll:.PropellerSceneManager
 37d65bf29af9dd2fac1cab17987f9faa Assembly-CSharp.dll:.AnimatedAlpha
 8416e9da8fd7dbae60d969efdb2242bd Assembly-CSharp.dll:.UIStretch
 f55492bcd9d3c95b5981d8fd2428b885 Assembly-CSharp.dll:.UIDragDropItem
