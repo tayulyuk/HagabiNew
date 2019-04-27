@@ -18,7 +18,7 @@ public class MqttManager : MonoBehaviour
     private string class3publish = "Hagabi/test3";  //3동 하우스
     private string subscribeReciveTempHumiMessage = "ModelTempHumi/result";
     private string resultMessage = "Hagabi/result";
-   
+    private string mqttAddress = "119.205.235.214";
 
     public GameObject errorPopUpObject;
     public GameObject reConnectPopUpObject;
@@ -29,7 +29,7 @@ public class MqttManager : MonoBehaviour
     void Start()
     {
         // create client instance 
-        client = new MqttClient(IPAddress.Parse("119.205.235.214"), 1883, false, null);
+        client = new MqttClient(IPAddress.Parse(mqttAddress), 1883, false, null);
 
         // register to message received 
         client.MqttMsgPublishReceived += client_MqttMsgPublishReceived;
