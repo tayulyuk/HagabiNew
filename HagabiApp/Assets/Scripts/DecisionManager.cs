@@ -12,10 +12,18 @@ public class DecisionManager : MonoBehaviour {
     /// </summary>
     public UILabel choiceNum;
     private CircleBlank circleBlank;
+    public GameObject loadingSprite;
+    private MqttManager mqttManager;
     void Start()
     {
+        mqttManager = GameObject.Find("ManagerGameObject").GetComponent<MqttManager>();
         circleBlank = GameObject.Find("CircleSelecterObject").GetComponent<CircleBlank>();
         StartCoroutine(InputInfo());
+    }
+
+    void Update()
+    {
+        loadingSprite.SetActive(mqttManager.isLoading);
     }
 
     private IEnumerator InputInfo()

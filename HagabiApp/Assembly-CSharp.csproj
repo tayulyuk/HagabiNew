@@ -221,6 +221,7 @@
      <Compile Include="Assets\Scripts\CurrentContent.cs" />
      <Compile Include="Assets\Scripts\DecisionManager.cs" />
      <Compile Include="Assets\Scripts\HttpGetIpManager.cs" />
+     <Compile Include="Assets\Scripts\Loading.cs" />
      <Compile Include="Assets\Scripts\ManagerController.cs" />
      <Compile Include="Assets\Scripts\Mqtt\scripts\Exceptions\MqttClientException.cs" />
      <Compile Include="Assets\Scripts\Mqtt\scripts\Exceptions\MqttCommunicationException.cs" />

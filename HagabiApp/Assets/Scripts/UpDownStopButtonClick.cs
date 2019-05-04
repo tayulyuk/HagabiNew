@@ -10,11 +10,6 @@ public class UpDownStopButtonClick : MonoBehaviour
 {
     private ManagerController mc;
     private MqttManager mqttManager;
-   
-    /// <summary>
-    /// 선택 버튼 번호.
-    /// </summary>
-    private string order;
     
     void Start()
     {
@@ -24,53 +19,47 @@ public class UpDownStopButtonClick : MonoBehaviour
 
     void OnClick()
     {
-        Debug.Log("transform name 1 : " + transform.name);
-        order = OrderMessage();
-        Debug.Log("order :" + order);
+        mqttManager.storeOrderMassage = OrderMessage(); // 현재 눌린 버튼의 이름을 저장 ( 비교해서 패킷을 재대로 돌아왔는지 확인)
+     
         Debug.Log("class :" + mqttManager.GetClassTopic(mc.currentClass));
+       
+        mqttManager.SendPublishButtonData(mqttManager.GetClassTopic(mc.currentClass),mqttManager.storeOrderMassage);
 
-        mqttManager.SendPublishButtonData(mqttManager.GetClassTopic(mc.currentClass),order);
-
+        //코루틴으로 재 전송 부분 
+        StartCoroutine(mqttManager.ReSendToServer());
         
         Debug.Log("mqttRecieveMessage1 :" + mqttManager.mqttRecieveMessage);
-
-       StartCoroutine(ArrowAction());
+        // 보낸 명령과 받은 명령이 같다면 작동해라.
+        if(mqttManager.isSignOk)
+            StartCoroutine(ArrowAction());
     }
 
-    private IEnumerator ArrowAction()
+    public IEnumerator ArrowAction()
     {
         yield return new WaitForSeconds(.5f);
         
         if(mqttManager != null)
             Debug.Log("not null  select num :" + mc.selectButtonNumber );
-        Debug.Log("mqttRecieveMessage 2:" + mqttManager.mqttRecieveMessage);
-       
-        //보낸 신호와 받은 신호가 같다면 다음 동작을 한다.
-        if (mqttManager.mqttRecieveMessage.Trim() == order.Trim() || !String.IsNullOrEmpty(mqttManager.mqttRecieveMessage) )
+      
+        ArrowButtonController arrowButtonController = GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>();
+        //HagabiDecision 씬의 버튼들.
+        if (transform.name == "UpButton")
         {
-            //HagabiDecision 씬의 버튼들.
-            if (transform.name == "UpButton")
-            {
-                GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().AllOffArrowfBlank();
-                GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().SelectStopCorouine();
-                GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().StartArrow(1); //1.up
-            }
-            else if (transform.name == "StopButton")
-            {
-                GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().AllOffArrowfBlank();
-                GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().SelectStopCorouine();
-                GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().StartArrow(2); //2.stop
-            }
-            else if (transform.name == "DownButton")
-            {
-                GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().AllOffArrowfBlank();
-                GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().SelectStopCorouine();
-                GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().StartArrow(3); //3.down
-            }
+            arrowButtonController.AllOffArrowfBlank();
+            arrowButtonController.SelectStopCorouine();
+            arrowButtonController.StartArrow(1); //1.up
         }
-        else
+        else if (transform.name == "StopButton")
         {
-            Debug.Log("두 명령 불일치.");
+            arrowButtonController.AllOffArrowfBlank();
+            arrowButtonController.SelectStopCorouine();
+            arrowButtonController.StartArrow(2); //2.stop
+        }
+        else if (transform.name == "DownButton")
+        {
+            arrowButtonController.AllOffArrowfBlank();
+            arrowButtonController.SelectStopCorouine();
+            arrowButtonController.StartArrow(3); //3.down
         }
     }
 

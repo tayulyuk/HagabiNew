@@ -20,11 +20,12 @@ public class MqttManager : MonoBehaviour
     private string resultMessage = "Hagabi/result";
     private string mqttAddress = "119.205.235.214";
 
-    public GameObject errorPopUpObject;
-    public GameObject reConnectPopUpObject;
-    public bool isError; // error message 들어오면 팝업 띠워주자.
-    public bool isReConnect; // 아두이노 wifi통신이 다시 접속했다는 메시지 창.
+    //public GameObject loadingObject;
+    public bool isLoading; // 현제 통신 로딩 중인가?.
     public bool isOne; // 메세지 한번 받을때 마다 라벨에 값을 입력합니다.   라벨값은 메인쓰레드에서만 입력하라네요. 
+    public string storeOrderMassage;
+    public bool isSignOk; // 보낸 명령 메시지와 받은 메시지가 같으면  true .
+    public float time;
 
     void Start()
     {
@@ -48,24 +49,12 @@ public class MqttManager : MonoBehaviour
     
         Debug.Log(e.Topic + " : " + System.Text.Encoding.UTF8.GetString(e.Message));
 
-        //moter constroler의 wifi가 불안정하여 다시 접속했다.  // 서버가 다시 접속 연결 됬습니다.
-        if (System.Text.Encoding.UTF8.GetString(e.Message) == "Reconnected")
-            isReConnect = true;
-
         if (e.Topic == subscribeReciveTempHumiMessage)
             TempHumiMessageParsing(System.Text.Encoding.UTF8.GetString(e.Message));
         if (e.Topic == resultMessage)
             mqttRecieveMessage = Encoding.UTF8.GetString(e.Message).Trim();
     }
-
-   void Update()
-    {
-        //팝업 메시지 띠우기.
-   //    errorPopUpObject.SetActive(isError);
-       
-        //아두이도 접속 창 띠우기.
-  //     reConnectPopUpObject.SetActive(isReConnect);
-    }
+   
 
     /// <summary>
     /// 버튼 클릭 현재 정보를 전달한다.
@@ -139,5 +128,43 @@ public class MqttManager : MonoBehaviour
         if (3 == currentClassNum)
             topic = class3publish;
         return topic;
+    }
+
+    /// <summary>
+    ///message type :  pinon 3
+    /// </summary>
+    /// <param name="buttonName"></param>
+    /// <returns></returns>
+    internal IEnumerator ReSendToServer()
+    {
+        yield return new WaitForSeconds(.1f);
+
+        if (mqttRecieveMessage.Trim() != storeOrderMassage.Trim()) //|| !String.IsNullOrEmpty(mqttRecieveMessage)
+        {
+            isSignOk = false; // true 면  화살표 표시 버튼이 눌러진다 . false면 화살표 안눌러진다.
+            isLoading = true;
+            Debug.Log("Message ReSend To Server 1");
+            SendPublishButtonData(GetClassTopic(GetComponent<ManagerController>().currentClass), storeOrderMassage);
+
+            if (time < 3)
+                time += .1f;
+            else
+            {
+                isLoading = false;
+                time = 0;
+                yield return new WaitForSeconds(.1f);
+                yield break;
+            }
+            Debug.Log("Message ReSend To Server 2");
+            StartCoroutine(ReSendToServer());
+        }
+        else // 두가지 조건이 같다면   기능 정지.
+        {
+            isSignOk = true; //화살표는 켜고.
+            isLoading = false; //로딩은 끄고
+            time = 0;
+            yield break;
+        }
+        
     }
 }
