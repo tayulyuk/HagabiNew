@@ -150,6 +150,7 @@ public class MqttManager : MonoBehaviour
                 time += .1f;
             else
             {
+                isSignOk = false;
                 isLoading = false;
                 time = 0;
                 yield return new WaitForSeconds(.1f);
@@ -158,12 +159,16 @@ public class MqttManager : MonoBehaviour
             Debug.Log("Message ReSend To Server 2");
             StartCoroutine(ReSendToServer());
         }
-        else // 두가지 조건이 같다면   기능 정지.
+        else if (mqttRecieveMessage.Trim() == storeOrderMassage.Trim()) // 두가지 조건이 같다면   기능 정지.
         {
             isSignOk = true; //화살표는 켜고.
             isLoading = false; //로딩은 끄고
             time = 0;
             yield break;
+        }
+        else
+        {
+            Debug.Log("머지..");
         }
         
     }

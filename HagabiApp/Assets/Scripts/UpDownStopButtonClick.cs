@@ -19,47 +19,57 @@ public class UpDownStopButtonClick : MonoBehaviour
 
     void OnClick()
     {
-        mqttManager.storeOrderMassage = OrderMessage(); // 현재 눌린 버튼의 이름을 저장 ( 비교해서 패킷을 재대로 돌아왔는지 확인)
-     
-        Debug.Log("class :" + mqttManager.GetClassTopic(mc.currentClass));
-       
-        mqttManager.SendPublishButtonData(mqttManager.GetClassTopic(mc.currentClass),mqttManager.storeOrderMassage);
+        if (!mqttManager.isLoading)
+        {
+            mqttManager.storeOrderMassage = OrderMessage(); // 현재 눌린 버튼의 이름을 저장 ( 비교해서 패킷을 재대로 돌아왔는지 확인)
 
-        //코루틴으로 재 전송 부분 
-        StartCoroutine(mqttManager.ReSendToServer());
-        
-        Debug.Log("mqttRecieveMessage1 :" + mqttManager.mqttRecieveMessage);
-        // 보낸 명령과 받은 명령이 같다면 작동해라.
-        if(mqttManager.isSignOk)
-            StartCoroutine(ArrowAction());
+            Debug.Log("class :" + mqttManager.GetClassTopic(mc.currentClass));
+
+            mqttManager.SendPublishButtonData(mqttManager.GetClassTopic(mc.currentClass), mqttManager.storeOrderMassage);
+
+            //코루틴으로 재 전송 부분 
+            StartCoroutine(mqttManager.ReSendToServer());
+
+            Debug.Log("mqttRecieveMessage1 :" + mqttManager.mqttRecieveMessage);
+            // 보낸 명령과 받은 명령이 같다면 작동해라.
+            if (mqttManager.isSignOk)
+                StartCoroutine(ArrowAction());
+        }
     }
 
     public IEnumerator ArrowAction()
     {
+        mqttManager.isSignOk = false;
+
         yield return new WaitForSeconds(.5f);
-        
-        if(mqttManager != null)
-            Debug.Log("not null  select num :" + mc.selectButtonNumber );
-      
-        ArrowButtonController arrowButtonController = GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>();
-        //HagabiDecision 씬의 버튼들.
-        if (transform.name == "UpButton")
+        ArrowButtonController arrowButtonController =
+               GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>();
+        if (!mqttManager.isLoading)
         {
-            arrowButtonController.AllOffArrowfBlank();
-            arrowButtonController.SelectStopCorouine();
-            arrowButtonController.StartArrow(1); //1.up
+            //HagabiDecision 씬의 버튼들.
+            if (transform.name == "UpButton")
+            {
+                arrowButtonController.AllOffArrowfBlank();
+                arrowButtonController.SelectStopCorouine();
+                arrowButtonController.StartArrow(1); //1.up
+            }
+            else if (transform.name == "StopButton")
+            {
+                arrowButtonController.AllOffArrowfBlank();
+                arrowButtonController.SelectStopCorouine();
+                arrowButtonController.StartArrow(2); //2.stop
+            }
+            else if (transform.name == "DownButton")
+            {
+                arrowButtonController.AllOffArrowfBlank();
+                arrowButtonController.SelectStopCorouine();
+                arrowButtonController.StartArrow(3); //3.down
+            }
         }
-        else if (transform.name == "StopButton")
+        else
         {
-            arrowButtonController.AllOffArrowfBlank();
             arrowButtonController.SelectStopCorouine();
-            arrowButtonController.StartArrow(2); //2.stop
-        }
-        else if (transform.name == "DownButton")
-        {
             arrowButtonController.AllOffArrowfBlank();
-            arrowButtonController.SelectStopCorouine();
-            arrowButtonController.StartArrow(3); //3.down
         }
     }
 
