@@ -22,7 +22,8 @@ public class ManagerController : MonoBehaviour {
     /// </summary>
     public string checkButtonNum = "";
 
-    private static ManagerController m_Instance = null; 
+    private static ManagerController m_Instance = null;
+    public string currentUpDownButtonName;   // up down 버튼의 값을 전달하기 위해.
 
     void Awake()
     {

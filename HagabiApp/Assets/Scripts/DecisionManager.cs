@@ -23,6 +23,12 @@ public class DecisionManager : MonoBehaviour {
 
     void Update()
     {
+        if (mqttManager.mqttRecieveMessage == mqttManager.storeOrderMassage)
+        {
+            mqttManager.isLoading = false;
+            mqttManager.isSignOk = true;
+        }
+
         loadingSprite.SetActive(mqttManager.isLoading);
     }
 

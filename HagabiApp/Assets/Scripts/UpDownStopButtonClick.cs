@@ -10,7 +10,7 @@ public class UpDownStopButtonClick : MonoBehaviour
 {
     private ManagerController mc;
     private MqttManager mqttManager;
-    
+
     void Start()
     {
         mc = GameObject.Find("ManagerGameObject").GetComponent<ManagerController>();
@@ -32,46 +32,16 @@ public class UpDownStopButtonClick : MonoBehaviour
 
             Debug.Log("mqttRecieveMessage1 :" + mqttManager.mqttRecieveMessage);
             // 보낸 명령과 받은 명령이 같다면 작동해라.
-            if (mqttManager.isSignOk)
-                StartCoroutine(ArrowAction());
+            if (mqttManager.isSignOk || !mqttManager.isLoading)
+            {
+                mc.currentUpDownButtonName = transform.name;  //  다시 호출하기 위해 일단 저장.
+                //Debug.Log(" tra pa :" + transform.parent.parent.transform.Find("UpStopDownShowObject").name);
+                StartCoroutine(transform.parent.parent.transform.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>().ArrowAction(transform.name));
+            }
         }
     }
 
-    public IEnumerator ArrowAction()
-    {
-        mqttManager.isSignOk = false;
-
-        yield return new WaitForSeconds(.5f);
-        ArrowButtonController arrowButtonController =
-               GameObject.Find("UpStopDownShowObject").GetComponent<ArrowButtonController>();
-        if (!mqttManager.isLoading)
-        {
-            //HagabiDecision 씬의 버튼들.
-            if (transform.name == "UpButton")
-            {
-                arrowButtonController.AllOffArrowfBlank();
-                arrowButtonController.SelectStopCorouine();
-                arrowButtonController.StartArrow(1); //1.up
-            }
-            else if (transform.name == "StopButton")
-            {
-                arrowButtonController.AllOffArrowfBlank();
-                arrowButtonController.SelectStopCorouine();
-                arrowButtonController.StartArrow(2); //2.stop
-            }
-            else if (transform.name == "DownButton")
-            {
-                arrowButtonController.AllOffArrowfBlank();
-                arrowButtonController.SelectStopCorouine();
-                arrowButtonController.StartArrow(3); //3.down
-            }
-        }
-        else
-        {
-            arrowButtonController.SelectStopCorouine();
-            arrowButtonController.AllOffArrowfBlank();
-        }
-    }
+    
 
     /// <summary>
     ///  1~14까지.

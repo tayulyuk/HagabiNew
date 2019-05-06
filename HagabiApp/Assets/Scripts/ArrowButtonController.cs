@@ -63,4 +63,39 @@ public class ArrowButtonController : MonoBehaviour
         if(arrowBlankCoroutine != null)
             StopCoroutine(arrowBlankCoroutine);
     }
+
+    public IEnumerator ArrowAction(string buttonName)
+    {
+        MqttManager mqttManager = GameObject.Find("ManagerGameObject").GetComponent<MqttManager>();
+        mqttManager.isSignOk = false;
+
+        yield return new WaitForSeconds(.5f);
+        if (!mqttManager.isLoading)
+        {
+            //HagabiDecision 씬의 버튼들.
+            if (buttonName == "UpButton")
+            {
+                AllOffArrowfBlank();
+                SelectStopCorouine();
+                StartArrow(1); //1.up
+            }
+            else if (buttonName == "StopButton")
+            {
+                AllOffArrowfBlank();
+                SelectStopCorouine();
+                StartArrow(2); //2.stop
+            }
+            else if (buttonName == "DownButton")
+            {
+                AllOffArrowfBlank();
+                SelectStopCorouine();
+                StartArrow(3); //3.down
+            }
+        }
+        else
+        {
+            SelectStopCorouine();
+            AllOffArrowfBlank();
+        }
+    }
 }

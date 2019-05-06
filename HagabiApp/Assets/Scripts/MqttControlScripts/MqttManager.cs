@@ -150,9 +150,23 @@ public class MqttManager : MonoBehaviour
                 time += .1f;
             else
             {
-                isSignOk = false;
+                //isSignOk = false;
                 isLoading = false;
                 time = 0;
+                if (isSignOk)
+                {
+                    StartCoroutine(
+                        GameObject.Find("UI Root (2D)")
+                            .transform.Find("Draggable")
+                            .transform.Find("LagPosition")
+                            .transform.Find("DragTilt")
+                            .transform.Find("Window")
+                            .transform.Find("UpStopDownShowObject")
+                            .
+                            GetComponent<ArrowButtonController>()
+                            .ArrowAction(gameObject.GetComponent<ManagerController>().currentUpDownButtonName));
+                    Debug.Log("이것이 실행됬다.");
+                }
                 yield return new WaitForSeconds(.1f);
                 yield break;
             }
@@ -164,6 +178,20 @@ public class MqttManager : MonoBehaviour
             isSignOk = true; //화살표는 켜고.
             isLoading = false; //로딩은 끄고
             time = 0;
+            if (isSignOk)
+            {
+                StartCoroutine(
+                    GameObject.Find("UI Root (2D)")
+                        .transform.Find("Draggable")
+                        .transform.Find("LagPosition")
+                        .transform.Find("DragTilt")
+                        .transform.Find("Window")
+                        .transform.Find("UpStopDownShowObject")
+                        .
+                        GetComponent<ArrowButtonController>()
+                        .ArrowAction(gameObject.GetComponent<ManagerController>().currentUpDownButtonName));
+                Debug.Log("2이것이 실행됬다.");
+            }
             yield break;
         }
         else
